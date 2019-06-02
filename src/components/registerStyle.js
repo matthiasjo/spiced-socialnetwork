@@ -9,6 +9,9 @@ const Input = styled.input`
     width: 100%;
     border-color: ${props => (props.error ? "red" : "palevioletred")};
     margin: 0.25rem;
+    :focus {
+        border-color: #02576c;
+    }
 `;
 
 const Label = styled.label`
@@ -27,6 +30,11 @@ const Button = styled.button`
     color: palevioletred;
     margin: 0.5em 1em;
     padding: 0.25em 1em;
+
+    :hover {
+        background: #02576c;
+        border: 0.2rem solid #02576c;
+    }
 
     ${props =>
         props.primary &&
@@ -69,6 +77,9 @@ const StyledLink = styled.a`
     text-decoration: none;
     color: palevioletred;
     font-weight: bold;
+    :hover {
+        color: #02576c;
+    }
 `;
 
 const Logo = styled.img`

@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../public/img/logo.svg";
-import styled from "styled-components";
+//import styled from "styled-components";
 
 export class Logo extends React.Component {
     render() {

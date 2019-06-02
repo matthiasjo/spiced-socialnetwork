@@ -34,6 +34,6 @@ router.route("/register").post((req, res) => {
         })
         .catch(err => {
             console.log(err);
-            res.json({ error: "OOps! Something went wrong. Try again" });
+            res.json({ error: "Oops! Something went wrong. Try again" });
         });
 });
