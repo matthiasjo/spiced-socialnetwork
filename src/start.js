@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import logo from "../public/img/logo.svg";
 import styled from "styled-components";
 import "./styles/normalize.css";
 import "./styles/style.css";
 
 import { Welcome } from "./components/welcome";
+import { Logo } from "./components/logo";
 
 const WelcomeContainer = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ if (location.pathname == "/welcome") {
         </WelcomeContainer>
     );
 } else {
-    elem = <img src={logo} height={120} width={120} />;
+    elem = <Logo />;
 }
 
 ReactDOM.render(elem, document.querySelector("main"));
