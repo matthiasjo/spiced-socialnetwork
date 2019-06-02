@@ -1,13 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import logo from "../public/img/logo.svg";
+import styled from "styled-components";
+import "./styles/normalize.css";
+import "./styles/style.css";
 
-ReactDOM.render(
-    <HelloWorld />,
-    document.querySelector('main')
-);
+import { Welcome } from "./components/welcome";
 
-function HelloWorld() {
-    return (
-        <div>Hello, World!</div>
+const WelcomeContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+`;
+
+let elem;
+
+if (location.pathname == "/welcome") {
+    elem = (
+        <WelcomeContainer>
+            <Welcome />
+        </WelcomeContainer>
     );
+} else {
+    elem = <img src={logo} />;
 }
+
+ReactDOM.render(elem, document.querySelector("main"));
