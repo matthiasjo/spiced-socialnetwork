@@ -56,6 +56,15 @@ const Form = styled.div`
     align-items: center;
 `;
 
+const Error = styled.div`
+    border-radius: 0.3rem;
+    border: 0.2rem solid #f44336;
+    background-color: #ffe837;
+    color: #f44336;
+    margin: 0.5em 1em;
+    padding: 0.25em 1em;
+`;
+
 const StyledLink = styled.a`
     text-decoration: none;
     color: palevioletred;
@@ -76,5 +85,6 @@ export {
     FormContainer,
     Form,
     StyledLink,
-    Logo
+    Logo,
+    Error
 };

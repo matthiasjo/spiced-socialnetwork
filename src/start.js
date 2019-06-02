@@ -22,7 +22,7 @@ if (location.pathname == "/welcome") {
         </WelcomeContainer>
     );
 } else {
-    elem = <img src={logo} />;
+    elem = <img src={logo} height={120} width={120} />;
 }
 
 ReactDOM.render(elem, document.querySelector("main"));

@@ -9,6 +9,10 @@ module.exports = router;
 router.use(express.json());
 router.use(expressSanitizer());
 
+router.route("/welcome").get((req, res) => {
+    res.sendFile(`${process.cwd()}/public/index.html`);
+});
+
 router.route("/register").post((req, res) => {
     bc.hashPassword(req.body.password)
         .then(pwHash => {
@@ -20,16 +24,16 @@ router.route("/register").post((req, res) => {
                 pwHash
             )
                 .then(qResponse => {
-                    req.session.userID = qResponse.rows[0].id;
+                    req.session.userId = qResponse.rows[0].id;
                     res.json({ success: true });
                 })
                 .catch(err => {
                     console.log(err);
-                    // render error
+                    res.json({ error: "Username or Email already exists" });
                 });
         })
         .catch(err => {
             console.log(err);
-            //render error
+            res.json({ error: "OOps! Something went wrong. Try again" });
         });
 });

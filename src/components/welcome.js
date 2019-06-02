@@ -10,7 +10,8 @@ import {
     FormContainer,
     Form,
     StyledLink,
-    Logo
+    Logo,
+    Error
 } from "./welcomeStyle";
 
 export class Welcome extends React.Component {
@@ -35,11 +36,17 @@ export class Welcome extends React.Component {
             .then(({ data }) => {
                 if (data.success) {
                     location.replace("/");
-                } else {
+                } else if (data.error) {
                     this.setState({
-                        error: true
+                        error: data.error
                     });
                 }
+            })
+            .catch(err => {
+                console.log(err);
+                this.setState({
+                    error: true
+                });
             });
     }
     render() {
@@ -49,7 +56,7 @@ export class Welcome extends React.Component {
                 <FormContainer>
                     <Heading1>Join a real social network for once!</Heading1>
                     <Form>
-                        {this.state.error && <div className="error">Oops!</div>}
+                        {this.state.error && <Error>{this.state.error}</Error>}
                         <Label htmlFor="first">First Name</Label>
                         <Input
                             name="first"

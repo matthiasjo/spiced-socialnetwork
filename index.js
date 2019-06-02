@@ -44,7 +44,11 @@ if (process.env.NODE_ENV != "production") {
 app.use(registerRouter);
 
 app.get("*", function(req, res) {
-    res.sendFile(__dirname + "/public/index.html");
+    if (!req.session.userId) {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/public/index.html");
+    }
 });
 
 app.use(serveStatic("./public"));
