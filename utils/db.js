@@ -12,8 +12,18 @@ module.exports.addUser = function addUser(
     bio,
     avatar
 ) {
-    return db.query(
-        `INSERT INTO users (first, last, username, email, password, bio, avatar) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
-        [first, last, username, email, pwhash, bio, avatar]
-    );
+    if (!/[^a-z]/i.test(first) && !/[^a-z]/i.test(last) && pwhash != "") {
+        return db.query(
+            `INSERT INTO users (first, last, username, email, password, bio, avatar) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
+            [first, last, username, email, pwhash, bio, avatar]
+        );
+    } else {
+        return Promise.reject(new Error("Wrong input"));
+    }
+};
+
+module.exports.getLoginData = function getLoginData(userinfo) {
+    return db.query(`SELECT * FROM users WHERE email=$1 OR username=$1`, [
+        userinfo
+    ]);
 };

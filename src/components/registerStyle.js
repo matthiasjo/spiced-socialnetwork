@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Input = styled.input`
     text-align: center;
@@ -6,10 +8,10 @@ const Input = styled.input`
     border: 0.2rem solid;
     padding: 0.25em;
     color: #103c42;
-    width: 100%;
     border-color: ${props => (props.error ? "red" : "palevioletred")};
     margin: 0.25rem;
     :focus {
+        outline: none;
         border-color: #02576c;
     }
 `;
@@ -30,6 +32,12 @@ const Button = styled.button`
     color: palevioletred;
     margin: 0.5em 1em;
     padding: 0.25em 1em;
+
+    :disabled {
+        background: #cfcfc4;
+        border: 0.2rem solid #cfcfc4;
+        color: black;
+    }
 
     :hover {
         background: #02576c;
@@ -58,8 +66,9 @@ const FormContainer = styled.div`
     flex-direction: column;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
 `;
@@ -73,7 +82,7 @@ const Error = styled.div`
     padding: 0.25em 1em;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
     text-decoration: none;
     color: palevioletred;
     font-weight: bold;

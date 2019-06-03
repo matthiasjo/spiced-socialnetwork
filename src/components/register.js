@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
 import logo from "../../public/img/logoT.svg";
 import {
     Input,
@@ -24,30 +24,37 @@ export class Registration extends React.Component {
             [target.name]: target.value
         });
     }
-    submit() {
-        axios
-            .post("/register", {
-                first: this.state.first,
-                last: this.state.last,
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password
-            })
-            .then(({ data }) => {
-                if (data.success) {
-                    location.replace("/");
-                } else if (data.error) {
-                    this.setState({
-                        error: data.error
-                    });
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                this.setState({
-                    error: true
-                });
+    submit(e) {
+        e.preventDefault();
+        if (this.state.username.includes("@")) {
+            this.setState({
+                error: "Username must not contain @ Symbol"
             });
+        } else {
+            axios
+                .post("/register", {
+                    first: this.state.first,
+                    last: this.state.last,
+                    username: this.state.username,
+                    email: this.state.email,
+                    password: this.state.password
+                })
+                .then(({ data }) => {
+                    if (data.success) {
+                        location.replace("/");
+                    } else if (data.error) {
+                        this.setState({
+                            error: data.error
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.setState({
+                        error: true
+                    });
+                });
+        }
     }
 
     render() {
@@ -56,7 +63,7 @@ export class Registration extends React.Component {
                 <Logo src={logo} height={350} width={350} />
                 <FormContainer>
                     <Heading1>Join a real social network for once!</Heading1>
-                    <Form>
+                    <Form onSubmit={e => this.submit(e)}>
                         {this.state.error && <Error>{this.state.error}</Error>}
                         <Label htmlFor="first">First Name</Label>
                         <Input
@@ -74,6 +81,7 @@ export class Registration extends React.Component {
                         />
                         <Label htmlFor="username">Username</Label>
                         <Input
+                            pattern="[^-,()/<>|]+"
                             name="username"
                             placeholder="username"
                             onChange={e => this.handleChange(e)}
@@ -86,7 +94,7 @@ export class Registration extends React.Component {
                             required
                             onChange={e => this.handleChange(e)}
                         />
-                        <Label htmlFor="pass">Password</Label>
+                        <Label htmlFor="password">Password</Label>
                         <Input
                             type="password"
                             name="password"
@@ -94,13 +102,17 @@ export class Registration extends React.Component {
                             required
                             onChange={e => this.handleChange(e)}
                         />
-                        <Button onClick={e => this.submit()} primary>
+                        <Button
+                            disabled={!this.state.password}
+                            type="submit"
+                            primary
+                        >
                             Register
                         </Button>
                     </Form>
                     <p>
                         Already a member?{" "}
-                        <StyledLink href="/login">Log in</StyledLink>
+                        <StyledLink to="/login">Log in</StyledLink>
                     </p>
                 </FormContainer>
             </Container>
