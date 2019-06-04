@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const serveStatic = require("serve-static");
-const registerRouter = require("./routers/registration");
-const loginRouter = require("./routers/login");
+const registerRouter = require("./routers/registrationRoute");
+const loginRouter = require("./routers/loginRoute");
+const userRouter = require("./routers/userRoute");
+const uploadRouter = require("./routers/picUploadRoute");
 const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieSession = require("cookie-session");
@@ -45,6 +47,10 @@ if (process.env.NODE_ENV != "production") {
 
 app.use(registerRouter);
 app.use(loginRouter);
+app.use(userRouter);
+app.use(uploadRouter);
+
+app.use(serveStatic("./public"));
 
 app.get("*", function(req, res) {
     if (!req.session.userId) {
@@ -53,7 +59,5 @@ app.get("*", function(req, res) {
         res.sendFile(__dirname + "/public/index.html");
     }
 });
-
-app.use(serveStatic("./public"));
 
 app.listen(port, () => console.log(`This server is listening on port ${port}`));

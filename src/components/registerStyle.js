@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import React from "react";
 import { Link } from "react-router-dom";
+import { AccountCircle } from "styled-icons/material";
 
 const Input = styled.input`
     text-align: center;
@@ -58,6 +58,14 @@ const Container = styled.div`
     flex-direction: column;
 `;
 
+const ModalContainer = styled.div`
+    height: 30vh;
+    display: flex;
+    z-index: 1;
+    justify-content: center;
+    flex-direction: column;
+`;
+
 const FormContainer = styled.div`
     display: flex;
     align-items: center;
@@ -97,6 +105,8 @@ const Logo = styled.img`
 `;
 
 export {
+    AccountCircle,
+    ModalContainer,
     Input,
     Label,
     Heading1,

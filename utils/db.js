@@ -27,3 +27,14 @@ module.exports.getLoginData = function getLoginData(userinfo) {
         userinfo
     ]);
 };
+
+module.exports.getUserData = function getUserData(userid) {
+    return db.query(`SELECT * FROM users WHERE id=$1`, [userid]);
+};
+
+module.exports.pushImage = function pushImage(id, avatar) {
+    return db.query(`UPDATE users SET avatar = $2 WHERE id = $1;`, [
+        id,
+        avatar
+    ]);
+};

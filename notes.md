@@ -8,3 +8,5 @@ part 1
 -   users see logo after successful log in
 
 first, last, email, password, bio, profile picture
+
+one app container component that containts all component after login

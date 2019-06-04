@@ -5,7 +5,7 @@ import "./styles/normalize.css";
 import "./styles/style.css";
 
 import { Welcome } from "./components/welcome";
-import { Logo } from "./components/logo";
+import { App } from "./components/app";
 
 const WelcomeContainer = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ if (location.pathname == "/welcome") {
         </WelcomeContainer>
     );
 } else {
-    elem = <Logo />;
+    elem = <App />;
 }
 
 ReactDOM.render(elem, document.querySelector("main"));
