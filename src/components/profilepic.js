@@ -1,9 +1,13 @@
 import React from "react";
 import { StyledProfilePic } from "./profilepicStyle";
 
-export default function profilePic({ imageUrl, username, clickHandler }) {
-    const user = username || "default username";
+export default function profilePic(props) {
+    const user = props.username || "default username";
     return (
-        <StyledProfilePic src={imageUrl} alt={user} onClick={clickHandler} />
+        <StyledProfilePic
+            src={props.avatar}
+            alt={user}
+            onClick={props.clickHandler}
+        />
     );
 }

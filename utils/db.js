@@ -33,8 +33,12 @@ module.exports.getUserData = function getUserData(userid) {
 };
 
 module.exports.pushImage = function pushImage(id, avatar) {
-    return db.query(`UPDATE users SET avatar = $2 WHERE id = $1;`, [
+    return db.query(`UPDATE users SET avatar = $2 WHERE id = $1`, [id, avatar]);
+};
+
+module.exports.updateBio = function updateBio(id, bio) {
+    return db.query(`UPDATE users SET bio = $2 WHERE id = $1 RETURNING bio`, [
         id,
-        avatar
+        bio
     ]);
 };

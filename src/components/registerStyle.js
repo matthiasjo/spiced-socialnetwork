@@ -59,11 +59,20 @@ const Container = styled.div`
 `;
 
 const ModalContainer = styled.div`
-    height: 30vh;
     display: flex;
-    z-index: 1;
-    justify-content: center;
+    position: fixed;
     flex-direction: column;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    max-width: 100%;
+    height: 600px;
+    max-height: 100%;
+    padding: 20px 50px 20px 20px;
+    overflow: auto;
+    z-index: 1;
 `;
 
 const FormContainer = styled.div`

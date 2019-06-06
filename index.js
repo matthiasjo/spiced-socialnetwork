@@ -6,6 +6,7 @@ const registerRouter = require("./routers/registrationRoute");
 const loginRouter = require("./routers/loginRoute");
 const userRouter = require("./routers/userRoute");
 const uploadRouter = require("./routers/picUploadRoute");
+const updateBioRoute = require("./routers/updateBioRoute");
 const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieSession = require("cookie-session");
@@ -49,6 +50,7 @@ app.use(registerRouter);
 app.use(loginRouter);
 app.use(userRouter);
 app.use(uploadRouter);
+app.use(updateBioRoute);
 
 app.use(serveStatic("./public"));
 
