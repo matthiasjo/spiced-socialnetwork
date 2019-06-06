@@ -3,6 +3,7 @@ import axios from "./axios";
 import ProfilePic from "./profilepic";
 import { Uploader } from "./uploader";
 import { Logo } from "./logo";
+import { Header } from "./appStyle";
 
 export class App extends React.Component {
     constructor(props) {
@@ -26,21 +27,21 @@ export class App extends React.Component {
             return <p>loading</p>;
         } else {
             return (
-                <div>
+                <Header>
                     <React.Fragment>
                         <Logo />
                     </React.Fragment>
                     <ProfilePic
                         imageUrl={this.state.avatar}
                         username={this.state.username}
-                        clickHandler={e =>
+                        clickHandler={() =>
                             this.setState({ uploaderVisible: true })
                         }
                     />
                     {this.state.uploaderVisible && (
                         <Uploader updatePic={this.updatePic} />
                     )}
-                </div>
+                </Header>
             );
         }
     }

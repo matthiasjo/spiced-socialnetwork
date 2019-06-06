@@ -20,14 +20,13 @@ export class Uploader extends React.Component {
     }
     handleChange(e) {
         this.setState({
-            profilePicture: event.target.files[0],
+            profilePicture: e.target.files[0],
             loaded: 0
         });
     }
     submit(e) {
         e.preventDefault();
         const data = new FormData();
-        console.log("smthsmth", this.state.profilePicture);
         data.append("file", this.state.profilePicture);
         axios.post("/upload", data).then(response => {
             console.log("new image", response.data);
