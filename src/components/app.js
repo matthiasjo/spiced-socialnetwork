@@ -5,6 +5,8 @@ import { Uploader } from "./uploader";
 import { Logo } from "./logo";
 import { Header } from "./appStyle";
 import { Profile } from "./profile";
+import { OtherProfile } from "./otherprofile";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export class App extends React.Component {
     constructor(props) {
@@ -36,7 +38,6 @@ export class App extends React.Component {
     }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
-            console.log(data);
             this.setState(data);
         });
     }
@@ -61,18 +62,36 @@ export class App extends React.Component {
                             />
                         )}
                     </Header>
-                    <div>
-                        <Profile
-                            id={this.state.id}
-                            first={this.state.first}
-                            last={this.state.last}
-                            avatar={this.state.avatar}
-                            username={this.state.username}
-                            clickHandler={this.clickHandler}
-                            bio={this.state.bio}
-                            setBio={this.setBio}
-                        />
-                    </div>
+                    <BrowserRouter>
+                        <div>
+                            <Route
+                                exact
+                                path="/"
+                                render={() => (
+                                    <Profile
+                                        id={this.state.id}
+                                        first={this.state.first}
+                                        last={this.state.last}
+                                        avatar={this.state.avatar}
+                                        username={this.state.username}
+                                        clickHandler={this.clickHandler}
+                                        bio={this.state.bio}
+                                        setBio={this.setBio}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/user/:id"
+                                render={props => (
+                                    <OtherProfile
+                                        key={props.match.url}
+                                        match={props.match}
+                                        history={props.history}
+                                    />
+                                )}
+                            />
+                        </div>
+                    </BrowserRouter>
                 </div>
             );
         }
