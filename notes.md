@@ -1,12 +1,58 @@
-part 1
+import React from "react";
+import ReactDOM from "react-dom";
+import {useState, useEffect } from "react";
 
--   at least 2 components. welcome & registration
--   4 form fields first, last email, pass
--   login and register will be switchable
--   welcome fuction or class. doesnt really need state
--   registration needs state, therfore class
--   users see logo after successful log in
+React.DOM.render(
+<Hello />,
+document.querySelector("main")
+);
 
-first, last, email, password, bio, profile picture
+function Hello(){
+const [greetee, setGreetee] = useState("World");
+const [punctuation, setPunctuation] = useState("!");
 
-one app container component that containts all component after login
+//useEffect as substitute for componentDidMount
+useEffect(() => {
+let abort;
+return = () => {
+abort = true
+}
+
+if ( greetee == "Kitty") {
+console.log("hi")
+}
+// OR
+console.log("hi")
+}, [setPunctuation])
+
+const handleChange = e => {
+setGreetee(e.target.value);
+setTimeout(function(){
+console.log(greete);
+},1000)
+};
+
+    return(
+        <div> Hello,{greetee} {punctuation}
+        <input onChange={handleChange} />
+        <input onChange={e => setPunctuation("?")} />
+        </div>
+        );
+
+}
+
+return (
+
+<div>
+{users.map(
+user => (
+    <div key={user.id}>
+<Link to={`/user/${user.id}`}>{user.first} {user.last}</Link>
+</div>
+)
+)}
+</div>
+)
+
+SELECT name FROM ACTORS
+WHERE first || '' || last ILIKE "j%";
