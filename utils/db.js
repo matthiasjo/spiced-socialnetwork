@@ -42,3 +42,17 @@ module.exports.updateBio = function updateBio(id, bio) {
         bio
     ]);
 };
+
+module.exports.searchUsers = function searchUsers(id, name) {
+    return db.query(
+        `SELECT id, first, last, username, avatar
+        FROM users
+        WHERE first ILIKE $2
+        OR last ILIKE $2
+        OR username ILIKE $2
+        AND id !=$1
+        ORDER BY last
+        LIMIT 5`,
+        [id, `%${name}%`]
+    );
+};

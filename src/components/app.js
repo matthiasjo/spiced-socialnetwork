@@ -6,6 +6,7 @@ import { Logo } from "./logo";
 import { Header } from "./appStyle";
 import { Profile } from "./profile";
 import { OtherProfile } from "./otherprofile";
+import { UserSearch } from "./userSearch";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export class App extends React.Component {
@@ -89,6 +90,10 @@ export class App extends React.Component {
                                         history={props.history}
                                     />
                                 )}
+                            />
+                            <Route
+                                path="/users"
+                                render={() => <UserSearch />}
                             />
                         </div>
                     </BrowserRouter>
