@@ -9,12 +9,16 @@ router.use(expressSanitizer());
 
 router.route("/userSearch").get(async (req, res) => {
     let name = req.sanitize(req.query.name);
-    if (!name && name == "") {
-        console.log("send 6 last users");
+    if (!name || name == "") {
+        try {
+            const lastestUsers = await db.getLatestUsers(req.session.userId);
+            res.json({ users: lastestUsers.rows });
+        } catch (e) {
+            console.log(e);
+        }
     } else {
         try {
             const userArr = await db.searchUsers(req.session.userId, name);
-            console.log("userArr", userArr.rows);
             res.json({ users: userArr.rows });
         } catch (e) {
             console.log(e);

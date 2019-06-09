@@ -52,7 +52,19 @@ module.exports.searchUsers = function searchUsers(id, name) {
         OR username ILIKE $2
         AND id !=$1
         ORDER BY last
-        LIMIT 5`,
+        LIMIT 20`,
         [id, `%${name}%`]
     );
 };
+
+module.exports.getLatestUsers = function getLatestUsers(userid) {
+    return db.query(
+        `SELECT id, first, last, username, avatar FROM users
+        WHERE id!=$1
+        ORDER BY id DESC
+        LIMIT 6`,
+        [userid]
+    );
+};
+
+//

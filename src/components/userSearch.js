@@ -13,7 +13,6 @@ export function UserSearch() {
     useEffect(
         () => {
             var abort;
-            console.log("name", name);
             axios
                 .get("/userSearch", {
                     params: {
@@ -23,10 +22,8 @@ export function UserSearch() {
                 .then(response => {
                     if (!abort) {
                         setUsers(response.data.users);
-                        console.log("users", users);
                         return () => {
                             abort = true;
-                            console.log("abort", abort);
                         };
                     }
                 })
