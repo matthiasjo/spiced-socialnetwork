@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledProfilePic } from "./profilepicStyle";
+import { StyledProfilePic } from "../theme/profilepicStyle";
 
 export default function profilePic(props) {
     const user = props.username || "default username";

@@ -8,7 +8,7 @@ import {
     FormContainer,
     Form,
     Error
-} from "./registerStyle";
+} from "../theme/registerStyle";
 
 export class Uploader extends React.Component {
     constructor(props) {

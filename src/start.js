@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-import "./styles/normalize.css";
-import "./styles/style.css";
+import { GlobalStyle } from "./theme/globalStyle";
 
 import { Welcome } from "./components/welcome";
 import { App } from "./components/app";
@@ -17,12 +16,20 @@ let elem;
 
 if (location.pathname == "/welcome") {
     elem = (
-        <WelcomeContainer>
-            <Welcome />
-        </WelcomeContainer>
+        <React.Fragment>
+            <GlobalStyle />
+            <WelcomeContainer>
+                <Welcome />
+            </WelcomeContainer>
+        </React.Fragment>
     );
 } else {
-    elem = <App />;
+    elem = (
+        <React.Fragment>
+            <GlobalStyle />
+            <App />
+        </React.Fragment>
+    );
 }
 
 ReactDOM.render(elem, document.querySelector("main"));
