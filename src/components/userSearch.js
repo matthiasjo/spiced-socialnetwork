@@ -12,7 +12,8 @@ export function UserSearch() {
     };
     useEffect(
         () => {
-            let abort;
+            var abort;
+            console.log("name", name);
             axios
                 .get("/userSearch", {
                     params: {
@@ -25,6 +26,7 @@ export function UserSearch() {
                         console.log("users", users);
                         return () => {
                             abort = true;
+                            console.log("abort", abort);
                         };
                     }
                 })
@@ -36,7 +38,7 @@ export function UserSearch() {
     return (
         <React.Fragment>
             <input type="text" onChange={handleChange} />
-            {users.lenght &&
+            {users.length &&
                 users.map(user => (
                     <div key={user.id}>
                         <ProfilePic
