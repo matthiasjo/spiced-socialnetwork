@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 import ProfilePic from "./profilepic";
 import { useState, useEffect } from "react";
 import axios from "./axios";
@@ -38,11 +39,13 @@ export function UserSearch() {
             {users.length &&
                 users.map(user => (
                     <div key={user.id}>
-                        <ProfilePic
-                            avatar={user.avatar}
-                            username={user.username}
-                        />
-                        {user.first + " " + user.last}
+                        <Link to={`/user/${user.id}`}>
+                            <ProfilePic
+                                avatar={user.avatar}
+                                username={user.username}
+                            />
+                            {user.first + " " + user.last}
+                        </Link>
                     </div>
                 ))}
         </React.Fragment>
