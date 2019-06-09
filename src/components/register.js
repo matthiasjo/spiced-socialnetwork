@@ -12,7 +12,7 @@ import {
     StyledLink,
     Logo,
     Error
-} from "../theme/registerStyle";
+} from "../theme/welcomeStyle";
 
 export class Registration extends React.Component {
     constructor(props) {

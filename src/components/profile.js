@@ -8,15 +8,6 @@ export class Profile extends React.Component {
         super(props);
         this.state = {};
     }
-    // submit(e) {
-    //     e.preventDefault();
-    //     const data = new FormData();
-    //     data.append("file", this.state.profilePicture);
-    //     axios.post("/upload", data).then(response => {
-    //         console.log("new image", response.data);
-    //         this.props.updatePic(response.data);
-    //     });
-    // }
     render() {
         return (
             <React.Fragment>
