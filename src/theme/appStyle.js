@@ -5,4 +5,6 @@ const Header = styled.header`
     background-color: blue;
 `;
 
-export { Header, Nav, Navbar, NavLink };
+const StyledNavLink = styled(NavLink)``;
+
+export { Header, Nav, Navbar, StyledNavLink };

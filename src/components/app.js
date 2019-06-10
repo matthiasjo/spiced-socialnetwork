@@ -3,11 +3,11 @@ import axios from "./axios";
 import ProfilePic from "./profilepic";
 import { Uploader } from "./uploader";
 import { Logo } from "./logo";
-import { Header, Nav, NavLink, Navbar } from "../theme/appStyle";
+import { Nav, Navbar, StyledNavLink } from "../theme/appStyle";
 import { Profile } from "./profile";
 import { OtherProfile } from "./otherprofile";
 import { UserSearch } from "./userSearch";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link, NavLink } from "react-router-dom";
 
 export class App extends React.Component {
     constructor(props) {
@@ -40,7 +40,7 @@ export class App extends React.Component {
     logout() {
         axios.get("/logoutUser").then(({ data }) => {
             if (data.success) {
-                this.props.history.push("/");
+                this.props.history.push("/welcome");
             }
         });
     }
@@ -61,12 +61,15 @@ export class App extends React.Component {
                                 <React.Fragment>
                                     <Logo />
                                 </React.Fragment>
-                                <Link to="/users">
-                                    <p>Search Users</p>
-                                </Link>
-                                <a href="/welcome" onClick={this.logout}>
-                                    <p>Logout</p>
-                                </a>
+                                <Nav>
+                                    <NavLink to="/users">Search Users</NavLink>
+                                </Nav>
+                                <Nav>
+                                    <NavLink to="/logout" onClick={this.logout}>
+                                        Logout
+                                    </NavLink>
+                                </Nav>
+
                                 <ProfilePic
                                     avatar={this.state.avatar}
                                     username={this.state.username}
