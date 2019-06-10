@@ -22,6 +22,7 @@ export function UserSearch() {
                 .then(response => {
                     if (!abort) {
                         setUsers(response.data.users);
+                        console.log("users", users);
                         return () => {
                             abort = true;
                         };
@@ -34,8 +35,8 @@ export function UserSearch() {
 
     return (
         <React.Fragment>
-            <input type="text" onChange={handleChange} />
-            {users.length &&
+            <input onChange={handleChange} />
+            {users.length ? (
                 users.map(user => (
                     <div key={user.id}>
                         <Link to={`/user/${user.id}`}>
@@ -46,7 +47,10 @@ export function UserSearch() {
                             {user.first + " " + user.last}
                         </Link>
                     </div>
-                ))}
+                ))
+            ) : (
+                <p>No Users Found</p>
+            )}
         </React.Fragment>
     );
 }

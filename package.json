@@ -49,6 +49,7 @@
         "serve-static": "^1.14.1",
         "socket.io": "^2.2.0",
         "spiced-pg": "^1.0.0",
+        "styled-bootstrap-components": "^4.0.0-alpha.0",
         "styled-components": "^4.2.1",
         "styled-icons": "^8.0.0",
         "styled-normalize": "^8.0.6",

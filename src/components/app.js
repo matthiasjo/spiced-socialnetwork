@@ -3,7 +3,7 @@ import axios from "./axios";
 import ProfilePic from "./profilepic";
 import { Uploader } from "./uploader";
 import { Logo } from "./logo";
-import { Header } from "../theme/appStyle";
+import { Header, Nav, NavLink, Navbar } from "../theme/appStyle";
 import { Profile } from "./profile";
 import { OtherProfile } from "./otherprofile";
 import { UserSearch } from "./userSearch";
@@ -37,6 +37,13 @@ export class App extends React.Component {
                 : { uploaderVisible: true }
         );
     }
+    logout() {
+        axios.get("/logoutUser").then(({ data }) => {
+            if (data.success) {
+                this.props.history.push("/");
+            }
+        });
+    }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
             this.setState(data);
@@ -48,54 +55,65 @@ export class App extends React.Component {
         } else {
             return (
                 <div>
-                    <Header>
-                        <React.Fragment>
-                            <Logo />
-                        </React.Fragment>
-                        <ProfilePic
-                            avatar={this.state.avatar}
-                            username={this.state.username}
-                        />
-                        {this.state.uploaderVisible && (
-                            <Uploader
-                                updatePic={this.updatePic}
-                                clickHandler={this.clickHandler}
-                            />
-                        )}
-                    </Header>
                     <BrowserRouter>
-                        <div>
-                            <Route
-                                exact
-                                path="/"
-                                render={() => (
-                                    <Profile
-                                        id={this.state.id}
-                                        first={this.state.first}
-                                        last={this.state.last}
-                                        avatar={this.state.avatar}
-                                        username={this.state.username}
-                                        clickHandler={this.clickHandler}
-                                        bio={this.state.bio}
-                                        setBio={this.setBio}
-                                    />
-                                )}
-                            />
-                            <Route
-                                path="/user/:id"
-                                render={props => (
-                                    <OtherProfile
-                                        key={props.match.url}
-                                        match={props.match}
-                                        history={props.history}
-                                    />
-                                )}
-                            />
-                            <Route
-                                path="/users"
-                                render={() => <UserSearch />}
-                            />
-                        </div>
+                        <React.Fragment>
+                            <Navbar>
+                                <React.Fragment>
+                                    <Logo />
+                                </React.Fragment>
+                                <Link to="/users">
+                                    <p>Search Users</p>
+                                </Link>
+                                <a href="/welcome" onClick={this.logout}>
+                                    <p>Logout</p>
+                                </a>
+                                <ProfilePic
+                                    avatar={this.state.avatar}
+                                    username={this.state.username}
+                                />
+                            </Navbar>
+
+                            {this.state.uploaderVisible && (
+                                <Uploader
+                                    updatePic={this.updatePic}
+                                    clickHandler={this.clickHandler}
+                                />
+                            )}
+
+                            <div>
+                                <Route
+                                    exact
+                                    path="/"
+                                    render={() => (
+                                        <Profile
+                                            id={this.state.id}
+                                            first={this.state.first}
+                                            last={this.state.last}
+                                            avatar={this.state.avatar}
+                                            username={this.state.username}
+                                            clickHandler={this.clickHandler}
+                                            bio={this.state.bio}
+                                            setBio={this.setBio}
+                                            updatePic={this.updatePic}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/user/:id"
+                                    render={props => (
+                                        <OtherProfile
+                                            key={props.match.url}
+                                            match={props.match}
+                                            history={props.history}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/users"
+                                    render={() => <UserSearch />}
+                                />
+                            </div>
+                        </React.Fragment>
                     </BrowserRouter>
                 </div>
             );
