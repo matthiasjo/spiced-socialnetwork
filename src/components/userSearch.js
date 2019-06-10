@@ -22,7 +22,6 @@ export function UserSearch() {
                 .then(response => {
                     if (!abort) {
                         setUsers(response.data.users);
-                        console.log("users", users);
                         return () => {
                             abort = true;
                         };

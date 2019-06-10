@@ -3,7 +3,7 @@ import axios from "./axios";
 import ProfilePic from "./profilepic";
 import { Uploader } from "./uploader";
 import { Logo } from "./logo";
-import { Nav, Navbar, StyledNavLink } from "../theme/appStyle";
+import { Nav, Navbar } from "../theme/appStyle";
 import { Profile } from "./profile";
 import { OtherProfile } from "./otherprofile";
 import { UserSearch } from "./userSearch";
