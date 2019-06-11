@@ -6,6 +6,21 @@ export class FriendRequest extends React.Component {
     constructor() {
         super();
         this.state = {};
+        this.submit = this.submit.bind(this);
+    }
+
+    submit() {
+        axios
+            .post(`/friendStatus/${this.props.requestId}`, {
+                friendship: this.state.friendship
+            })
+            .then(({ data }) => {
+                this.setState({
+                    buttonText: data.buttonText,
+                    friendship: data.friendship
+                });
+            })
+            .catch(err => console.log(err));
     }
 
     componentDidMount() {
@@ -22,7 +37,7 @@ export class FriendRequest extends React.Component {
 
     render() {
         return (
-            <Button primary onClick={this.submit()}>
+            <Button primary onClick={this.submit}>
                 {this.state.buttonText}
             </Button>
         );

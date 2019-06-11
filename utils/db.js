@@ -70,7 +70,39 @@ module.exports.getLatestUsers = function getLatestUsers(userid) {
 module.exports.getFriendship = function getFriendship(requestId, userId) {
     return db.query(
         `SELECT * FROM friendships
-        WHERE receiver_id=$1 AND sender_id=$2`,
+        WHERE receiver_id=$1 AND sender_id=$2
+        OR receiver_id=$2 AND sender_id=$1`,
+        [requestId, userId]
+    );
+};
+
+module.exports.sendFriendRequest = function sendFriendRequest(
+    requestId,
+    userId
+) {
+    return db.query(
+        `INSERT INTO friendships (receiver_id, sender_id) VALUES($1, $2)`,
+        [requestId, userId]
+    );
+};
+
+module.exports.deleteFriendship = function deleteFriendship(requestId, userId) {
+    return db.query(
+        `DELETE FROM friendships
+        WHERE receiver_id=$1 AND sender_id=$2
+        OR receiver_id=$2 AND sender_id=$1`,
+        [requestId, userId]
+    );
+};
+
+module.exports.establishFriendship = function establishFriendship(
+    requestId,
+    userId
+) {
+    // NO OR
+    return db.query(
+        `UPDATE friendships SET accepted = true
+        WHERE receiver_id=$2 AND sender_id=$1`,
         [requestId, userId]
     );
 };
