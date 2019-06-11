@@ -56,3 +56,17 @@ user => (
 
 SELECT name FROM ACTORS
 WHERE first || '' || last ILIKE "j%";
+
+const onChange = e => setValues({
+...values,
+[e.target.name]: e.target.value
+});
+
+4 queries
+
+selecting // check status
+deleting // end frenship
+insert // send friendship
+update // accepting friendships
+
+button logic in state like with if else depending on json response from server

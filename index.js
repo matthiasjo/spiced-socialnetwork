@@ -62,10 +62,9 @@ app.use(serveStatic("./public"));
 
 app.get("*", function(req, res) {
     if (!req.session.userId) {
-        console.log("HAAAAAAAAAAAAAAAAALLLLLLLLLLLLLOOOOOOOOOO");
         res.redirect("/welcome");
     } else {
-        res.sendFile(__dirname + "/public/index.html");
+        res.sendFile(__dirname + "/index.html");
     }
 });
 

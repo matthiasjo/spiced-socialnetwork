@@ -9,7 +9,11 @@ module.exports = router;
 router.use(expressSanitizer());
 
 router.route("/welcome").get((req, res) => {
-    res.sendFile(`${process.cwd()}/public/index.html`);
+    if (req.session.userId) {
+        res.redirect("/");
+    } else {
+        res.sendFile(`${process.cwd()}/index.html`);
+    }
 });
 
 router.route("/register").post(async (req, res) => {

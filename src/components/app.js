@@ -7,7 +7,7 @@ import { Nav, Navbar } from "../theme/appStyle";
 import { Profile } from "./profile";
 import { OtherProfile } from "./otherprofile";
 import { UserSearch } from "./userSearch";
-import { BrowserRouter, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, NavLink } from "react-router-dom";
 
 export class App extends React.Component {
     constructor(props) {
@@ -37,13 +37,6 @@ export class App extends React.Component {
                 : { uploaderVisible: true }
         );
     }
-    logout() {
-        axios.get("/logoutUser").then(({ data }) => {
-            if (data.success) {
-                this.props.history.push("/welcome");
-            }
-        });
-    }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
             this.setState(data);
@@ -65,9 +58,7 @@ export class App extends React.Component {
                                     <NavLink to="/users">Search Users</NavLink>
                                 </Nav>
                                 <Nav>
-                                    <NavLink to="/logout" onClick={this.logout}>
-                                        Logout
-                                    </NavLink>
+                                    <a href="/logout">Logout</a>
                                 </Nav>
 
                                 <ProfilePic
