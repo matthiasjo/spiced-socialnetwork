@@ -10,6 +10,7 @@ const updateBioRoute = require("./routers/updateBioRoute");
 const otherUserRoute = require("./routers/otherUserRoute");
 const userSearchRoute = require("./routers/userSearchRoute");
 const logoutRoute = require("./routers/logoutRoute");
+const friendRequestRoute = require("./routers/friendRequestRoute");
 const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieSession = require("cookie-session");
@@ -57,6 +58,7 @@ app.use(updateBioRoute);
 app.use(otherUserRoute);
 app.use(userSearchRoute);
 app.use(logoutRoute);
+app.use(friendRequestRoute);
 
 app.use(serveStatic("./public"));
 

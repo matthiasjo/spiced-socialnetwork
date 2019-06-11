@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
 import ProfilePic from "./profilepic";
+import { FriendRequest } from "./friendrequest";
 
 export class OtherProfile extends React.Component {
     constructor() {
@@ -29,6 +30,7 @@ export class OtherProfile extends React.Component {
                     avatar={this.state.avatar}
                     username={this.state.username}
                 />
+                <FriendRequest requestId={this.props.match.params.id} />
                 <p>
                     {this.state.first} {this.state.first}
                 </p>

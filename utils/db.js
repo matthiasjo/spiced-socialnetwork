@@ -67,4 +67,10 @@ module.exports.getLatestUsers = function getLatestUsers(userid) {
     );
 };
 
-//
+module.exports.getFriendship = function getFriendship(requestId, userId) {
+    return db.query(
+        `SELECT * FROM friendships
+        WHERE receiver_id=$1 AND sender_id=$2`,
+        [requestId, userId]
+    );
+};
