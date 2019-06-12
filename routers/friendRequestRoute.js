@@ -37,7 +37,6 @@ router
                     buttonText: "Accept Friend Request"
                 });
             }
-            //console.log(friendStatus);
         } catch (e) {
             console.log(e);
         }
@@ -45,35 +44,58 @@ router
     .post(async (req, res) => {
         console.log("response", req.body.friendship);
         console.log("params", req.params.id);
-        if (req.body.friendship == false) {
-            // insert and send "accept friendship"
-            const qResponse = await db.sendFriendRequest(
-                req.params.id,
-                req.session.userId
-            );
-            res.json({
-                friendship: "cancel",
-                buttonText: "Cancel Friend Request"
-            });
-        } else if (
-            req.body.friendship == true ||
-            req.body.friendship == "cancel"
-        ) {
-            // delete friendship and send "make friend request"
-            const qResponse = await db.deleteFriendship(
-                req.params.id,
-                req.session.userId
-            );
-            res.json({
-                friendship: false,
-                buttonText: "Send Friend Request"
-            });
-        } else if (req.body.friendship == "pending") {
-            // establish friendship end send "end friendship"
-            const qResponse = await db.establishFriendship(
-                req.params.id,
-                req.session.userId
-            );
-            res.json({ friendship: true, buttonText: "End Friendship" });
+        try {
+            if (req.body.friendship == false) {
+                const statusCheck = await db.checkRequestStatus(
+                    req.params.id,
+                    req.session.userId
+                );
+                // insert and send "accept friendship"
+                if (statusCheck.rows[0].exists == false) {
+                    const qResponse = await db.sendFriendRequest(
+                        req.params.id,
+                        req.session.userId
+                    );
+                    res.json({
+                        friendship: "cancel",
+                        buttonText: "Cancel Friend Request"
+                    });
+                } else {
+                    const qResponse = await db.establishFriendship(
+                        req.params.id,
+                        req.session.userId
+                    );
+                    res.json({
+                        friendship: true,
+                        error: "You won a immediate friendship",
+                        buttonText: "End Friendship"
+                    });
+                }
+            } else if (
+                req.body.friendship == true ||
+                req.body.friendship == "cancel"
+            ) {
+                // delete friendship and send "make friend request"
+                const qResponse = await db.deleteFriendship(
+                    req.params.id,
+                    req.session.userId
+                );
+                res.json({
+                    friendship: false,
+                    buttonText: "Send Friend Request"
+                });
+            } else if (req.body.friendship == "pending") {
+                // establish friendship end send "end friendship"
+                const qResponse = await db.establishFriendship(
+                    req.params.id,
+                    req.session.userId
+                );
+                res.json({
+                    friendship: true,
+                    buttonText: "End Friendship"
+                });
+            }
+        } catch (err) {
+            console.log("error", err);
         }
     });

@@ -76,6 +76,17 @@ module.exports.getFriendship = function getFriendship(requestId, userId) {
     );
 };
 
+module.exports.checkRequestStatus = function checkRequestStatus(
+    requestId,
+    userId
+) {
+    return db.query(
+        `SELECT EXISTS (SELECT id FROM friendships WHERE receiver_id=$1 AND sender_id=$2
+        OR receiver_id=$2 AND sender_id=$1)`,
+        [requestId, userId]
+    );
+};
+
 module.exports.sendFriendRequest = function sendFriendRequest(
     requestId,
     userId

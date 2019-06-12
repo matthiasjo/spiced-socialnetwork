@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "./axios";
-import { Button } from "../theme/welcomeStyle";
+import { Button, Error } from "../theme/welcomeStyle";
 
 export class FriendRequest extends React.Component {
     constructor() {
@@ -15,10 +15,18 @@ export class FriendRequest extends React.Component {
                 friendship: this.state.friendship
             })
             .then(({ data }) => {
-                this.setState({
-                    buttonText: data.buttonText,
-                    friendship: data.friendship
-                });
+                if (data.error) {
+                    this.setState({
+                        buttonText: data.buttonText,
+                        friendship: data.friendship,
+                        error: data.error
+                    });
+                } else {
+                    this.setState({
+                        buttonText: data.buttonText,
+                        friendship: data.friendship
+                    });
+                }
             })
             .catch(err => console.log(err));
     }
@@ -37,9 +45,12 @@ export class FriendRequest extends React.Component {
 
     render() {
         return (
-            <Button primary onClick={this.submit}>
-                {this.state.buttonText}
-            </Button>
+            <React.Fragment>
+                {this.state.error && <Error>{this.state.error}</Error>}
+                <Button primary onClick={this.submit}>
+                    {this.state.buttonText}
+                </Button>
+            </React.Fragment>
         );
     }
 }
