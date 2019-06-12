@@ -12,7 +12,8 @@ export class FriendRequest extends React.Component {
     submit() {
         axios
             .post(`/friendStatus/${this.props.requestId}`, {
-                friendship: this.state.friendship
+                friendship: this.state.friendship,
+                rejectFlag: this.state.rejectFlag
             })
             .then(({ data }) => {
                 if (data.error) {
@@ -24,21 +25,33 @@ export class FriendRequest extends React.Component {
                 } else {
                     this.setState({
                         buttonText: data.buttonText,
-                        friendship: data.friendship
+                        friendship: data.friendship,
+                        rejectText: data.rejectText,
+                        rejectFlag: data.rejectFlag
                     });
                 }
             })
             .catch(err => console.log(err));
+        console.log("state", this.state);
     }
 
     componentDidMount() {
         axios
             .get(`/friendStatus/${this.props.requestId}`)
             .then(({ data }) => {
-                this.setState({
-                    buttonText: data.buttonText,
-                    friendship: data.friendship
-                });
+                if (data.rejectFlag) {
+                    this.setState({
+                        buttonText: data.buttonText,
+                        friendship: data.friendship,
+                        rejectText: data.rejectText,
+                        rejectFlag: data.rejectFlag
+                    });
+                } else {
+                    this.setState({
+                        buttonText: data.buttonText,
+                        friendship: data.friendship
+                    });
+                }
             })
             .catch(err => console.log(err));
     }
@@ -50,6 +63,11 @@ export class FriendRequest extends React.Component {
                 <Button primary onClick={this.submit}>
                     {this.state.buttonText}
                 </Button>
+                {this.state.rejectFlag == "reject" ? (
+                    <Button onClick={this.submit}>
+                        {this.state.rejectText}
+                    </Button>
+                ) : null}
             </React.Fragment>
         );
     }

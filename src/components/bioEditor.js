@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import { Button } from "../theme/welcomeStyle";
 
 export class BioEditor extends React.Component {
     constructor(props) {
@@ -41,15 +42,17 @@ export class BioEditor extends React.Component {
                             cols="30"
                             rows="10"
                         />
-                        <button type="submit">Add Bio</button>
+                        <Button primary type="submit">
+                            Add Bio
+                        </Button>
                     </form>
                 )}
                 {this.props.bio && !this.state.bioEditorVisible && (
                     <div>
                         {this.props.bio}
-                        <button onClick={() => this.showBioEditor()}>
+                        <Button primary onClick={() => this.showBioEditor()}>
                             edit
-                        </button>
+                        </Button>
                     </div>
                 )}
                 {this.state.bioEditorVisible && (
@@ -63,7 +66,9 @@ export class BioEditor extends React.Component {
                                 cols="30"
                                 rows="10"
                             />
-                            <button type="submit">Submit</button>
+                            <Button primary type="submit">
+                                Submit
+                            </Button>
                         </form>
                     </React.Fragment>
                 )}

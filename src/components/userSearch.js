@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ProfilePic from "./profilepic";
 import { useState, useEffect } from "react";
+import { FriendRequest } from "./friendrequest";
 import axios from "./axios";
 
 export function UserSearch() {
@@ -45,6 +46,7 @@ export function UserSearch() {
                             />
                             {user.first + " " + user.last}
                         </Link>
+                        <FriendRequest requestId={user.id} />
                     </div>
                 ))
             ) : (

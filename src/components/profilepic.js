@@ -1,4 +1,5 @@
 import React from "react";
+import styled, { css } from "styled-components";
 import { StyledProfilePic } from "../theme/profilepicStyle";
 
 export default function profilePic(props) {
@@ -11,3 +12,14 @@ export default function profilePic(props) {
         />
     );
 }
+
+// export default function profilePic(props) {
+//     const user = props.username || "default username";
+//     return (
+//         <StyledProfilePic
+//             src={props.avatar}
+//             alt={user}
+//             onClick={props.clickHandler}
+//         />
+//     );
+// }
