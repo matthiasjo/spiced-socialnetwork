@@ -47,10 +47,9 @@ module.exports.searchUsers = function searchUsers(id, name) {
     return db.query(
         `SELECT id, first, last, username, avatar
         FROM users
-        WHERE first ILIKE $2
-        OR last ILIKE $2
-        OR username ILIKE $2
-        AND id !=$1
+        WHERE first ILIKE $2 AND users.id <> $1
+        OR last ILIKE $2 AND users.id <> $1
+        OR username ILIKE $2 AND users.id <> $1
         ORDER BY last
         LIMIT 20`,
         [id, `%${name}%`]

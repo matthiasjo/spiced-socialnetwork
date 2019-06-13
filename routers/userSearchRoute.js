@@ -18,7 +18,10 @@ router.route("/userSearch").get(async (req, res) => {
         }
     } else {
         try {
-            const userArr = await db.searchUsers(req.session.userId, name);
+            const userArr = await db.searchUsers(
+                Number(req.session.userId),
+                name
+            );
             res.json({ users: userArr.rows });
         } catch (e) {
             console.log(e);

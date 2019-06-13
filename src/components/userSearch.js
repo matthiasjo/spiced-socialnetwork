@@ -23,12 +23,12 @@ export function UserSearch() {
                 .then(response => {
                     if (!abort) {
                         setUsers(response.data.users);
-                        return () => {
-                            abort = true;
-                        };
                     }
                 })
                 .catch(err => console.log(err));
+            return () => {
+                abort = true;
+            };
         },
         [name]
     );
