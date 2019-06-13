@@ -8,6 +8,7 @@ import { Profile } from "./profile";
 import { OtherProfile } from "./otherprofile";
 import { UserSearch } from "./userSearch";
 import { BrowserRouter, Route, NavLink } from "react-router-dom";
+import { StyledProfilePic } from "../theme/profilepicStyle";
 
 export class App extends React.Component {
     constructor(props) {
@@ -62,6 +63,7 @@ export class App extends React.Component {
                                 </Nav>
 
                                 <ProfilePic
+                                    compName={StyledProfilePic}
                                     avatar={this.state.avatar}
                                     username={this.state.username}
                                 />
