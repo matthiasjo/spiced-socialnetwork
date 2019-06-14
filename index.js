@@ -11,6 +11,7 @@ const otherUserRoute = require("./routers/otherUserRoute");
 const userSearchRoute = require("./routers/userSearchRoute");
 const logoutRoute = require("./routers/logoutRoute");
 const friendRequestRoute = require("./routers/friendRequestRoute");
+const friendsListRoute = require("./routers/friendsListRoute");
 const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieSession = require("cookie-session");
@@ -59,6 +60,7 @@ app.use(otherUserRoute);
 app.use(userSearchRoute);
 app.use(logoutRoute);
 app.use(friendRequestRoute);
+app.use(friendsListRoute);
 
 app.use(serveStatic("./public"));
 

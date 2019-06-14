@@ -110,10 +110,22 @@ module.exports.establishFriendship = function establishFriendship(
     requestId,
     userId
 ) {
-    // NO OR
     return db.query(
         `UPDATE friendships SET accepted = true
         WHERE receiver_id=$2 AND sender_id=$1`,
         [requestId, userId]
+    );
+};
+
+module.exports.getAllFriends = function getAllFriends(userId) {
+    return db.query(
+        `SELECT users.id, first, last, username, avatar, accepted
+    FROM friendships
+    JOIN users
+    ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)
+`,
+        [userId]
     );
 };

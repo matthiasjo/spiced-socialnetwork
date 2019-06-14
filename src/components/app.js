@@ -9,6 +9,7 @@ import { OtherProfile } from "./otherprofile";
 import { UserSearch } from "./userSearch";
 import { BrowserRouter, Route, NavLink } from "react-router-dom";
 import { StyledProfilePic } from "../theme/profilepicStyle";
+import Friends from "./friendlist";
 
 export class App extends React.Component {
     constructor(props) {
@@ -108,6 +109,7 @@ export class App extends React.Component {
                                     path="/users"
                                     render={() => <UserSearch />}
                                 />
+                                <Route path="/friends" component={Friends} />
                             </div>
                         </React.Fragment>
                     </BrowserRouter>
