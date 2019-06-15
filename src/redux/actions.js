@@ -15,7 +15,6 @@ export async function endFriendship(userId) {
         rejectFlag: false
     });
     if (disconnect.data.success) {
-        console.log("I am here");
         return {
             type: "DISCONNECT_FRIENDS",
             data: userId
