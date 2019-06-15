@@ -31,6 +31,7 @@ const Button = styled.button`
     color: palevioletred;
     margin: 0.5em 1em;
     padding: 0.25em 1em;
+    transition: 0.15s all ease-in;
 
     :disabled {
         background: #cfcfc4;

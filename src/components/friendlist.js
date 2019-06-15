@@ -1,30 +1,80 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getListOfFriends } from "../redux/actions";
+import {
+    getListOfFriends,
+    endFriendship,
+    acceptFriendship,
+    rejectFriendship
+} from "../redux/actions";
 import ProfilePic from "./profilepic";
+import { FriendsList, FriendCard } from "../theme/appStyle";
+import { Button } from "../theme/welcomeStyle";
 
 function Friends(props) {
     useEffect(() => {
         props.dispatch(getListOfFriends());
     }, []);
+
+    let disconnect = async userId => {
+        props.dispatch(endFriendship(userId));
+    };
+    let accept = async userId => {
+        props.dispatch(acceptFriendship(userId));
+    };
+    let reject = async userId => {
+        props.dispatch(rejectFriendship(userId));
+    };
     return (
         <React.Fragment>
-            {props.friends ? (
-                props.friends.map(friend => (
-                    <div key={friend.id}>
-                        <Link to={`/user/${friend.id}`}>
-                            <ProfilePic
-                                avatar={friend.avatar}
-                                username={friend.username}
-                            />
-                            {friend.first + " " + friend.last}
-                        </Link>
-                    </div>
-                ))
-            ) : (
-                <p>No Users Found</p>
-            )}
+            <p>Current Friends</p>
+            <FriendsList>
+                {props.friends ? (
+                    props.friends.map(friend => (
+                        <FriendCard key={friend.id}>
+                            <Link to={`/user/${friend.id}`}>
+                                <ProfilePic
+                                    avatar={friend.avatar}
+                                    username={friend.username}
+                                />
+                                <div>{friend.first + " " + friend.last}</div>
+                            </Link>
+                            <Button
+                                primary
+                                onClick={() => disconnect(friend.id)}
+                            >
+                                Disconnect
+                            </Button>
+                        </FriendCard>
+                    ))
+                ) : (
+                    <p>You do not have any friendships</p>
+                )}
+            </FriendsList>
+            <p>Pending Friends</p>
+            <FriendsList>
+                {props.pending ? (
+                    props.pending.map(friend => (
+                        <FriendCard key={friend.id}>
+                            <Link to={`/user/${friend.id}`}>
+                                <ProfilePic
+                                    avatar={friend.avatar}
+                                    username={friend.username}
+                                />
+                                <div>{friend.first + " " + friend.last}</div>
+                            </Link>
+                            <Button primary onClick={() => accept(friend.id)}>
+                                Accept
+                            </Button>
+                            <Button onClick={() => reject(friend.id)}>
+                                Reject
+                            </Button>
+                        </FriendCard>
+                    ))
+                ) : (
+                    <p>No pending friend requests</p>
+                )}
+            </FriendsList>
         </React.Fragment>
     );
 }

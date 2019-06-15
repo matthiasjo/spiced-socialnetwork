@@ -18,7 +18,7 @@ router
                     buttonText: "Send Friend Request"
                 });
             } else if (friendStatus.rows[0].accepted == true) {
-                res.json({ friendship: true, buttonText: "End Friendship" });
+                res.json({ friendship: true, buttonText: "Disconnect" });
             } else if (
                 friendStatus.rows[0].accepted == false &&
                 friendStatus.rows[0].sender_id == req.session.userId
@@ -68,7 +68,7 @@ router
                     res.json({
                         friendship: true,
                         error: "You won a immediate friendship",
-                        buttonText: "End Friendship"
+                        buttonText: "Disconnect"
                     });
                 }
             } else if (
@@ -79,6 +79,7 @@ router
                 // delete friendship and send "make friend request"
                 await db.deleteFriendship(req.params.id, req.session.userId);
                 res.json({
+                    success: true,
                     friendship: false,
                     buttonText: "Send Friend Request",
                     rejectText: false,
@@ -88,6 +89,7 @@ router
                 // establish friendship end send "end friendship"
                 await db.establishFriendship(req.params.id, req.session.userId);
                 res.json({
+                    success: true,
                     friendship: true,
                     buttonText: "End Friendship"
                 });
