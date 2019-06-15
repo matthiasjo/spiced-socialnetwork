@@ -10,7 +10,7 @@ import {
     ModalFooter,
     Container
 } from "styled-bootstrap-components";
-import { Input, Button, Form, Error } from "../theme/welcomeStyle";
+import { Button, Error } from "../theme/welcomeStyle";
 import { UploadButtonWrapper, UploadInputField } from "../theme/appStyle";
 import ProfilePic from "./profilepic";
 import { UserProfilePic } from "../theme/profilepicStyle";

@@ -33,7 +33,6 @@ router
     .route("/upload")
     .post(uploader.single("file"), s3.upload, function(req, res) {
         // If nothing went wrong the file is already in the uploads directory
-        console.log("THIS IS MY CONSOLE LOG", req.body);
         const url =
             `https://s3.amazonaws.com/spiced-salt-image-board/` +
             req.file.filename;
