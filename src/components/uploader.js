@@ -11,6 +11,9 @@ import {
     Container
 } from "styled-bootstrap-components";
 import { Input, Button, Form, Error } from "../theme/welcomeStyle";
+import { UploadButtonWrapper, UploadInputField } from "../theme/appStyle";
+import ProfilePic from "./profilepic";
+import { UserProfilePic } from "../theme/profilepicStyle";
 
 export class Uploader extends React.Component {
     constructor(props) {
@@ -21,11 +24,12 @@ export class Uploader extends React.Component {
             avatar: null
         };
     }
-    handleChange(e) {
-        this.setState({
+    async handleChange(e) {
+        await this.setState({
             profilePicture: e.target.files[0],
             loaded: 0
         });
+        this.submit(e);
     }
     submit(e) {
         e.preventDefault();
@@ -46,29 +50,32 @@ export class Uploader extends React.Component {
                                 <ModalTitle>
                                     Upload your Profile image
                                 </ModalTitle>
-                                <Button onClick={this.props.clickHandler}>
+                                <Button
+                                    primary
+                                    onClick={this.props.clickHandler}
+                                >
                                     <span aria-hidden="true">&times;</span>
                                 </Button>
                             </ModalHeader>
                             <ModalBody>
-                                <Form onSubmit={e => this.submit(e)}>
-                                    <Input
-                                        type="file"
-                                        name="file"
-                                        onChange={e => this.handleChange(e)}
-                                    />
-
-                                    <Button
-                                        disabled={!this.state.profilePicture}
-                                        primary
-                                        type="submit"
-                                    >
-                                        Upload
-                                    </Button>
+                                <ProfilePic
+                                    compName={UserProfilePic}
+                                    avatar={this.props.avatar}
+                                    username={this.props.username}
+                                />
+                                <div>
+                                    <UploadButtonWrapper>
+                                        <Button primary>Upload</Button>
+                                        <UploadInputField
+                                            type="file"
+                                            name="file"
+                                            onChange={e => this.handleChange(e)}
+                                        />
+                                    </UploadButtonWrapper>
                                     {this.state.error && (
                                         <Error>{this.state.error}</Error>
                                     )}
-                                </Form>
+                                </div>
                             </ModalBody>
                             <ModalFooter>
                                 <Button onClick={this.props.clickHandler}>
@@ -82,25 +89,3 @@ export class Uploader extends React.Component {
         );
     }
 }
-
-// <ModalContainer>
-//     <FormContainer>
-//         <Form onSubmit={e => this.submit(e)}>
-//             <Input
-//                 type="file"
-//                 name="file"
-//                 onChange={e => this.handleChange(e)}
-//             />
-//
-//             <Button
-//                 disabled={!this.state.profilePicture}
-//                 primary
-//                 type="submit"
-//             >
-//                 Upload
-//             </Button>
-//             {this.state.error && <Error>{this.state.error}</Error>}
-//             <Label>upload profile photo</Label>
-//         </Form>
-//     </FormContainer>
-// </ModalContainer>

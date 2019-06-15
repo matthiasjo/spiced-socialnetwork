@@ -78,6 +78,8 @@ export class App extends React.Component {
 
                             {this.state.uploaderVisible && (
                                 <Uploader
+                                    avatar={this.state.avatar}
+                                    username={this.state.username}
                                     updatePic={this.updatePic}
                                     clickHandler={this.clickHandler}
                                 />
