@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Nav, NavLink, Navbar } from "styled-bootstrap-components";
+import { Button } from "styled-bootstrap-components";
 
 const Header = styled.header`
     background-color: blue;
@@ -18,6 +19,8 @@ const FriendCard = styled.div`
     width: 10rem;
 `;
 
+const BButton = styled(Button)``;
+
 const StyledNavLink = styled(NavLink)``;
 
-export { Header, Nav, Navbar, StyledNavLink, FriendsList, FriendCard };
+export { Header, Nav, Navbar, StyledNavLink, FriendsList, FriendCard, BButton };

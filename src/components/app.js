@@ -7,7 +7,7 @@ import { Nav, Navbar } from "../theme/appStyle";
 import { Profile } from "./profile";
 import { OtherProfile } from "./otherprofile";
 import { UserSearch } from "./userSearch";
-import { BrowserRouter, Route, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import { StyledProfilePic } from "../theme/profilepicStyle";
 import Friends from "./friendlist";
 
@@ -57,7 +57,13 @@ export class App extends React.Component {
                                     <Logo />
                                 </React.Fragment>
                                 <Nav>
-                                    <NavLink to="/users">Search Users</NavLink>
+                                    <Link to="/">Profile</Link>
+                                </Nav>
+                                <Nav>
+                                    <Link to="/users">Search Users</Link>
+                                </Nav>
+                                <Nav>
+                                    <Link to="/friends">Friends</Link>
                                 </Nav>
                                 <Nav>
                                     <a href="/logout">Logout</a>
