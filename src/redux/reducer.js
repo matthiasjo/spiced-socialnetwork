@@ -12,7 +12,9 @@ export default function reducer(state = {}, action) {
         return {
             ...state,
             friends: state.friends.map(friend => {
-                friend.accepted = true;
+                if (friend.id == action.data) {
+                    friend.accepted = true;
+                }
                 return friend;
             })
         };

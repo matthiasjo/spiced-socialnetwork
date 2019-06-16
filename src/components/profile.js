@@ -17,6 +17,9 @@ export class Profile extends React.Component {
                     username={this.props.username}
                     clickHandler={this.props.clickHandler}
                 />
+                {this.props.username}
+
+                <div>{this.props.first + " " + this.props.last}</div>
                 <BioEditor bio={this.props.bio} setBio={this.props.setBio} />
             </React.Fragment>
         );
