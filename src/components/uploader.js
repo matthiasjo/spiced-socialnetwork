@@ -65,7 +65,9 @@ export class Uploader extends React.Component {
                                 />
                                 <div>
                                     <UploadButtonWrapper>
-                                        <Button primary>Upload</Button>
+                                        <Button primary>
+                                            Change Profile Picture
+                                        </Button>
                                         <UploadInputField
                                             type="file"
                                             name="file"

@@ -54,7 +54,9 @@ export class Login extends React.Component {
                 <FormContainer>
                     <Heading1>Welcome back. Please log in!</Heading1>
                     <Form onSubmit={e => this.submit(e)}>
-                        {this.state.error && <Error>{this.state.error}</Error>}
+                        {this.state.error && (
+                            <Error danger>{this.state.error}</Error>
+                        )}
                         <Label htmlFor="first">Username or Email</Label>
                         <Input
                             name="user"

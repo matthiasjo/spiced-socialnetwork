@@ -59,7 +59,7 @@ export class FriendRequest extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {this.state.error && <Error>{this.state.error}</Error>}
+                {this.state.error && <Error danger>{this.state.error}</Error>}
                 <Button primary onClick={this.submit}>
                     {this.state.buttonText}
                 </Button>

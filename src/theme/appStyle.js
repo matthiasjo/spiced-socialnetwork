@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Nav, NavLink, Navbar } from "styled-bootstrap-components";
-import { Button } from "styled-bootstrap-components";
+import { Button, Badge } from "styled-bootstrap-components";
 
 const Header = styled.header`
     background-color: blue;
@@ -46,5 +46,6 @@ export {
     FriendCard,
     BButton,
     UploadButtonWrapper,
-    UploadInputField
+    UploadInputField,
+    Badge
 };

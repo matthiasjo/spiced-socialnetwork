@@ -8,7 +8,7 @@ import {
     rejectFriendship
 } from "../redux/actions";
 import ProfilePic from "./profilepic";
-import { FriendsList, FriendCard } from "../theme/appStyle";
+import { FriendsList, FriendCard, Badge } from "../theme/appStyle";
 import { Button } from "../theme/welcomeStyle";
 
 function Friends(props) {
@@ -27,7 +27,10 @@ function Friends(props) {
     };
     return (
         <React.Fragment>
-            <p>Current Friends</p>
+            <p>
+                Current Friends
+                <Badge light>{props.friends && props.friends.length}</Badge>
+            </p>
             <FriendsList>
                 {props.friends ? (
                     props.friends.map(friend => (
@@ -51,7 +54,10 @@ function Friends(props) {
                     <p>You do not have any friendships</p>
                 )}
             </FriendsList>
-            <p>Pending Friends</p>
+            <p>
+                Pending Friends
+                <Badge light>{props.pending && props.pending.length}</Badge>
+            </p>
             <FriendsList>
                 {props.pending ? (
                     props.pending.map(friend => (
@@ -67,7 +73,7 @@ function Friends(props) {
                                 Accept
                             </Button>
                             <Button onClick={() => reject(friend.id)}>
-                                Reject
+                                Decline
                             </Button>
                         </FriendCard>
                     ))

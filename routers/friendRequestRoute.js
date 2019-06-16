@@ -34,8 +34,8 @@ router
                 // POSSIBLE REJECT BUTTON IN HERE
                 res.json({
                     friendship: "pending",
-                    buttonText: "Accept Friend Request",
-                    rejectText: "Reject Friend Request",
+                    buttonText: "Accept",
+                    rejectText: "Decline",
                     rejectFlag: "reject"
                 });
             }

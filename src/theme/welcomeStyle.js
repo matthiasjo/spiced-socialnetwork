@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { Alert } from "styled-bootstrap-components";
 
 const Input = styled.input`
     text-align: center;
@@ -92,14 +93,7 @@ const Form = styled.form`
     align-items: center;
 `;
 
-const Error = styled.div`
-    border-radius: 0.3rem;
-    border: 0.2rem solid #f44336;
-    background-color: #ffe837;
-    color: #f44336;
-    margin: 0.5em 1em;
-    padding: 0.25em 1em;
-`;
+const Error = styled(Alert)``;
 
 const StyledLink = styled(Link)`
     text-decoration: none;

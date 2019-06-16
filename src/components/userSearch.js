@@ -4,6 +4,8 @@ import ProfilePic from "./profilepic";
 import { useState, useEffect } from "react";
 import { FriendRequest } from "./friendrequest";
 import axios from "./axios";
+import { Container, FormControl } from "styled-bootstrap-components";
+import { Label, Error } from "../theme/welcomeStyle";
 
 export function UserSearch() {
     const [users, setUsers] = useState([]);
@@ -34,8 +36,9 @@ export function UserSearch() {
     );
 
     return (
-        <React.Fragment>
-            <input onChange={handleChange} />
+        <Container style={{ paddingTop: "3rem" }}>
+            <FormControl onChange={handleChange} />
+            <Label>Search by name, username or exact email</Label>
             {users.length ? (
                 users.map(user => (
                     <div key={user.id}>
@@ -50,8 +53,8 @@ export function UserSearch() {
                     </div>
                 ))
             ) : (
-                <p>No Users Found</p>
+                <Error info>No Users Found</Error>
             )}
-        </React.Fragment>
+        </Container>
     );
 }

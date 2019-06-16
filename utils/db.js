@@ -49,11 +49,12 @@ module.exports.searchUsers = function searchUsers(id, name) {
         FROM users
         WHERE (first ILIKE $2
         OR last ILIKE $2
-        OR username ILIKE $2)
+        OR username ILIKE $2
+        OR email = $3)
         AND (users.id <> $1)
         ORDER BY last
         LIMIT 20`,
-        [id, `%${name}%`]
+        [id, `%${name}%`, name]
     );
 };
 
