@@ -1,7 +1,7 @@
 import { chatMessages, chatMessage } from "../redux/actions";
 import * as io from "socket.io-client";
 
-let socket;
+export let socket;
 
 export const init = store => {
     if (!socket) {

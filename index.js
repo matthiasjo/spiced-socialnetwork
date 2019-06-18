@@ -36,7 +36,6 @@ const cookieSessionMiddleware = cookieSession({
 
 app.use(cookieSessionMiddleware);
 io.use(function(socket, next) {
-    console.log("i am here");
     cookieSessionMiddleware(socket.request, socket.request.res, next);
 });
 
@@ -95,41 +94,21 @@ io.on("connection", socket => {
 
     db.getMostRecentChatMsgs()
         .then(results => {
-            // console.log("got chat messages: ", results.rows);
-            socket.emit("chatMessages", results.rows);
+            socket.emit("chatMessages", results.rows.reverse());
         })
         .catch(err => {
             console.log(err);
         });
+    socket.on("chatMessage", async msg => {
+        try {
+            const newMsgId = await db.updateChat(
+                msg,
+                socket.request.session.userId
+            );
+            const newMsgInfo = await db.checkChatUpdate(newMsgId.rows[0].id);
+            io.sockets.emit("chatMessage", newMsgInfo.rows[0]);
+        } catch (e) {
+            console.log(e);
+        }
+    });
 });
-// socket.on("chatMessage", msg => {
-//     console.log("received message: ", msg);
-//     console.log("user id: ", socket.request.session.userId);
-//     db.updateChat(msg, socket.request.session.userId)
-//         .then(results => {
-//             console.log("updateChat db response: ", results.rows[0]);
-//             socket.emit("chatMessage", results.rows);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         });
-// });
-
-// io.on("connection", function(socket) {
-//     console.log(`Socket with id ${socket.id} just connected`);
-//     if (!socket.request.session.userId) {
-//         return socket.disconnect(true);
-//     }
-//     const userId = socket.request.session.userId;
-//
-//     socket.on(
-//         "chatMessages",
-//         db
-//             .getMostRecentChatMsgs()
-//             .then(msgs => socket.emit("chatMessages", msgs.rows.reverse()))
-//     );
-
-// socket.on("chatMessages", msg => {
-//     console.log(`Socket with id ${socket.id} just disconnected`);
-// });
-//});

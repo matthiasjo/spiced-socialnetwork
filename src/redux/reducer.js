@@ -29,7 +29,7 @@ export default function reducer(state = {}, action) {
         return { ...state, chatMessages: action.data };
     }
     if (action.type === "NEWEST_MESSAGE") {
-        return { ...state, chatMessage: action.data };
+        return { ...state, chatMessages: [...state.chatMessages, action.data] };
     }
     return state;
 }

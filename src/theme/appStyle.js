@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
 import { Nav, NavLink, Navbar } from "styled-bootstrap-components";
-import { Button, Badge, Modal } from "styled-bootstrap-components";
+import { Button, Badge, Modal, Container } from "styled-bootstrap-components";
 
 const fadeOut = keyframes`
   0% {
@@ -61,5 +61,6 @@ export {
     UploadButtonWrapper,
     UploadInputField,
     Badge,
-    FadeoutModal
+    FadeoutModal,
+    Container
 };

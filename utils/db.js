@@ -139,3 +139,22 @@ module.exports.getMostRecentChatMsgs = function getMostRecentChatMsgs() {
         ON sender_id = users.id
         ORDER BY msg_id DESC LIMIT 10`);
 };
+
+module.exports.updateChat = function updateChat(msg, senderId) {
+    return db.query(
+        `INSERT INTO chat (sender_id, message) VALUES($2, $1) RETURNING id`,
+        [msg, senderId]
+    );
+};
+
+module.exports.checkChatUpdate = function checkChatUpdate(chatId) {
+    return db.query(
+        `SELECT chat.id AS msg_id, message, users.id AS user_id,
+        first, last, avatar, chat.created_at
+        FROM chat
+        JOIN users
+        ON sender_id = users.id
+        WHERE chat.id = $1`,
+        [chatId]
+    );
+};
