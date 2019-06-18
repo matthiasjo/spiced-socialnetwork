@@ -10,6 +10,7 @@ import { UserSearch } from "./userSearch";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { StyledProfilePic } from "../theme/profilepicStyle";
 import Friends from "./friendlist";
+import Chat from "./chat";
 
 export class App extends React.Component {
     constructor(props) {
@@ -66,6 +67,9 @@ export class App extends React.Component {
                                     <Link to="/friends">Friends</Link>
                                 </Nav>
                                 <Nav>
+                                    <Link to="/chat">Chat</Link>
+                                </Nav>
+                                <Nav>
                                     <a href="/logout">Logout</a>
                                 </Nav>
 
@@ -118,6 +122,7 @@ export class App extends React.Component {
                                     render={() => <UserSearch />}
                                 />
                                 <Route path="/friends" component={Friends} />
+                                <Route path="/chat" component={Chat} />
                             </div>
                         </React.Fragment>
                     </BrowserRouter>

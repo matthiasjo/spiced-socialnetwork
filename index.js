@@ -16,7 +16,12 @@ const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
+const db = require("./utils/db");
 const port = 8080;
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    origins: "localhost:8080 127.0.0.1:8080"
+});
 
 app.use(helmet());
 app.use(compression());
@@ -24,14 +29,16 @@ app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(
-    cookieSession({
-        name: "session",
-        secret: `trail of cookie crumbs to the secret.`,
-        // Cookie Options
-        maxAge: 24 * 60 * 60 * 1000 // 24 hours
-    })
-);
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    console.log("i am here");
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(csurf());
 app.use(function(req, res, next) {
@@ -72,4 +79,57 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(port, () => console.log(`This server is listening on port ${port}`));
+server.listen(port, () =>
+    console.log(`This server is listening on port ${port}`)
+);
+
+///////////////////////     SOCKET IO STUFF \\\\\\\\\\\\\\\\\\\\\\\\
+
+io.on("connection", socket => {
+    console.log(`Socket with id ${socket.id} just connected`);
+    if (!socket.request.session.userId) {
+        socket.on("disconect", function() {
+            console.log(`Socket with id ${socket.id} disconnected`);
+        });
+    }
+
+    db.getMostRecentChatMsgs()
+        .then(results => {
+            // console.log("got chat messages: ", results.rows);
+            socket.emit("chatMessages", results.rows);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+// socket.on("chatMessage", msg => {
+//     console.log("received message: ", msg);
+//     console.log("user id: ", socket.request.session.userId);
+//     db.updateChat(msg, socket.request.session.userId)
+//         .then(results => {
+//             console.log("updateChat db response: ", results.rows[0]);
+//             socket.emit("chatMessage", results.rows);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         });
+// });
+
+// io.on("connection", function(socket) {
+//     console.log(`Socket with id ${socket.id} just connected`);
+//     if (!socket.request.session.userId) {
+//         return socket.disconnect(true);
+//     }
+//     const userId = socket.request.session.userId;
+//
+//     socket.on(
+//         "chatMessages",
+//         db
+//             .getMostRecentChatMsgs()
+//             .then(msgs => socket.emit("chatMessages", msgs.rows.reverse()))
+//     );
+
+// socket.on("chatMessages", msg => {
+//     console.log(`Socket with id ${socket.id} just disconnected`);
+// });
+//});

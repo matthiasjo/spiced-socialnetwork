@@ -49,3 +49,17 @@ export async function rejectFriendship(userId) {
     }
     return {};
 }
+
+export async function chatMessages(msgs) {
+    return {
+        type: "LATEST_MESSAGES",
+        data: msgs
+    };
+}
+
+export async function chatMessage(msg) {
+    return {
+        type: "NEWEST_MESSAGE",
+        data: msg
+    };
+}

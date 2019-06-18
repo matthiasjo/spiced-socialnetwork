@@ -130,3 +130,12 @@ module.exports.getAllFriends = function getAllFriends(userId) {
         [userId]
     );
 };
+
+module.exports.getMostRecentChatMsgs = function getMostRecentChatMsgs() {
+    return db.query(`SELECT chat.id AS msg_id, message, users.id AS user_id,
+        first, last, avatar, chat.created_at
+        FROM chat
+        JOIN users
+        ON sender_id = users.id
+        ORDER BY msg_id DESC LIMIT 10`);
+};

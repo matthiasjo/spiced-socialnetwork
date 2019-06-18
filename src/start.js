@@ -9,6 +9,7 @@ import { createStore, applyMiddleware } from "redux";
 import reduxPromise from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 import reducer from "./redux/reducer";
+import { init as initSocket } from "./components/socket";
 
 const store = createStore(
     reducer,
@@ -27,6 +28,7 @@ if (location.pathname == "/welcome") {
         </React.Fragment>
     );
 } else {
+    initSocket(store);
     elem = (
         <React.Fragment>
             <GlobalStyle />
