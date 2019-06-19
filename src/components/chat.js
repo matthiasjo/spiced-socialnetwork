@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { socket } from "./socket";
-import ProfilePic from "./profilepic";
 import Moment from "react-moment";
 import "moment-timezone";
 import { Button } from "../theme/welcomeStyle";
@@ -45,8 +44,7 @@ class Chat extends React.Component {
                             this.props.chatMessages.map(chat => (
                                 <div key={chat.msg_id}>
                                     <Link to={`/user/${chat.user_id}`}>
-                                        <ProfilePic
-                                            compName={ChatProfilePic}
+                                        <ChatProfilePic
                                             avatar={chat.avatar}
                                             username={chat.username}
                                         />

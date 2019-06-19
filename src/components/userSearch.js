@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ProfilePic from "./profilepic";
+import { UserProfilePic } from "../theme/profilepicStyle";
 import { useState, useEffect } from "react";
 import { FriendRequest } from "./friendrequest";
 import axios from "./axios";
@@ -43,7 +43,7 @@ export function UserSearch() {
                 users.map(user => (
                     <div key={user.id}>
                         <Link to={`/user/${user.id}`}>
-                            <ProfilePic
+                            <UserProfilePic
                                 avatar={user.avatar}
                                 username={user.username}
                             />

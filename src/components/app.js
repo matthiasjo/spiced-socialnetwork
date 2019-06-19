@@ -9,6 +9,7 @@ import { OtherProfile } from "./otherprofile";
 import { UserSearch } from "./userSearch";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { StyledProfilePic } from "../theme/profilepicStyle";
+
 import Friends from "./friendlist";
 import Chat from "./chat";
 
@@ -73,8 +74,7 @@ export class App extends React.Component {
                                     <a href="/logout">Logout</a>
                                 </Nav>
 
-                                <ProfilePic
-                                    compName={StyledProfilePic}
+                                <StyledProfilePic
                                     avatar={this.state.avatar}
                                     username={this.state.username}
                                 />

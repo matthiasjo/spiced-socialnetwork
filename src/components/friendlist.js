@@ -7,7 +7,7 @@ import {
     acceptFriendship,
     rejectFriendship
 } from "../redux/actions";
-import ProfilePic from "./profilepic";
+import { UserProfilePic } from "../theme/profilepicStyle";
 import { FriendsList, FriendCard, Badge } from "../theme/appStyle";
 import { Button } from "../theme/welcomeStyle";
 
@@ -36,7 +36,7 @@ function Friends(props) {
                     props.friends.map(friend => (
                         <FriendCard key={friend.id}>
                             <Link to={`/user/${friend.id}`}>
-                                <ProfilePic
+                                <UserProfilePic
                                     avatar={friend.avatar}
                                     username={friend.username}
                                 />
@@ -63,7 +63,7 @@ function Friends(props) {
                     props.pending.map(friend => (
                         <FriendCard key={friend.id}>
                             <Link to={`/user/${friend.id}`}>
-                                <ProfilePic
+                                <UserProfilePic
                                     avatar={friend.avatar}
                                     username={friend.username}
                                 />
