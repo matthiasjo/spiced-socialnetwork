@@ -50,9 +50,46 @@ const BButton = styled(Button)``;
 
 const StyledNavLink = styled(NavLink)``;
 
+const Chatbox = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    overflow: scroll;
+    height: 60vh;
+    width: 60vw;
+    margin-bottom: 2rem;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+const ChatBubble = styled.div`
+    display: flex;
+    background: tomato;
+
+    :nth-child(odd) {
+        background: blue;
+    }
+`;
+
+const ChatWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+`;
+
+const Messagebox = styled.textarea`
+    resize: none;
+    outline: none;
+    border-radius: 1rem;
+    height: 4rem;
+    width: 60vw;
+`;
+
 export {
     Header,
     Nav,
+    Messagebox,
     Navbar,
     StyledNavLink,
     FriendsList,
@@ -62,5 +99,8 @@ export {
     UploadInputField,
     Badge,
     FadeoutModal,
-    Container
+    Container,
+    Chatbox,
+    ChatBubble,
+    ChatWrapper
 };

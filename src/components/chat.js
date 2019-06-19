@@ -6,7 +6,12 @@ import Moment from "react-moment";
 import "moment-timezone";
 import { Button } from "../theme/welcomeStyle";
 import { ChatProfilePic } from "../theme/profilepicStyle";
-import { Container } from "../theme/appStyle";
+import {
+    Chatbox,
+    ChatBubble,
+    ChatWrapper,
+    Messagebox
+} from "../theme/appStyle";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -25,8 +30,10 @@ class Chat extends React.Component {
         }
     }
     submit() {
-        console.log("this state", this.state.chat);
         socket.emit("chatMessage", this.state.chat);
+        this.setState({
+            chat: ""
+        });
     }
 
     componentDidMount() {}
@@ -37,37 +44,32 @@ class Chat extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div>
+                <ChatWrapper>
                     <div>Chatbox</div>
-                    <Container fluid ref={this.elemRef}>
-                        {this.props.chatMessages ? (
+                    <Chatbox ref={this.elemRef}>
+                        {this.props.chatMessages &&
                             this.props.chatMessages.map(chat => (
-                                <div key={chat.msg_id}>
+                                <ChatBubble key={chat.msg_id}>
                                     <Link to={`/user/${chat.user_id}`}>
+                                        {chat.first + " " + chat.last + " at "}
+                                    </Link>
+                                    <Moment format="DD.MM.YY HH:mm">
+                                        {chat.created_at}
+                                    </Moment>
+                                    <div>
                                         <ChatProfilePic
                                             avatar={chat.avatar}
                                             username={chat.username}
                                         />
-                                        <div>
-                                            {chat.first +
-                                                " " +
-                                                chat.last +
-                                                " at "}
-                                            <Moment format="DD.MM.YY HH:mm">
-                                                {chat.created_at}
-                                            </Moment>
-                                        </div>
-                                    </Link>
-                                    {chat.message}
-                                </div>
-                            ))
-                        ) : (
-                            <p>You do not have any friendships</p>
-                        )}
-                    </Container>
-                    <textarea
+                                        {chat.message}
+                                    </div>
+                                </ChatBubble>
+                            ))}
+                    </Chatbox>
+                    <Messagebox
                         name="chat"
                         id=""
+                        value={this.state.chat}
                         cols="30"
                         rows="10"
                         onChange={e => this.handleChange(e)}
@@ -76,7 +78,7 @@ class Chat extends React.Component {
                     <Button primary onClick={() => this.submit()}>
                         Submit
                     </Button>
-                </div>
+                </ChatWrapper>
             </React.Fragment>
         );
     }
