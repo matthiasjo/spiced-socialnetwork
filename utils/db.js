@@ -158,3 +158,12 @@ module.exports.checkChatUpdate = function checkChatUpdate(chatId) {
         [chatId]
     );
 };
+
+module.exports.getOnlineUsers = function getOnlineUsers(userArr) {
+    console.log("arr in query", userArr);
+    return db.query(
+        `SELECT id, first, last, username, avatar FROM users
+        WHERE id = ANY($1)`,
+        [userArr]
+    );
+};

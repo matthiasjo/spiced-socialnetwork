@@ -31,5 +31,11 @@ export default function reducer(state = {}, action) {
     if (action.type === "NEWEST_MESSAGE") {
         return { ...state, chatMessages: [...state.chatMessages, action.data] };
     }
+    if (action.type === "ONLINE_USERS") {
+        return {
+            ...state,
+            onlineUsers: action.data
+        };
+    }
     return state;
 }

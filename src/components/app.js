@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "./axios";
-import ProfilePic from "./profilepic";
+import { socket } from "./socket";
 import { Uploader } from "./uploader";
 import { Logo } from "./logo";
 import { Nav, Navbar } from "../theme/appStyle";
@@ -44,6 +44,7 @@ export class App extends React.Component {
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
             this.setState(data);
+            socket.emit("onlineUsers", data.id);
         });
     }
     render() {

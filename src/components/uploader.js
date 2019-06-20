@@ -11,12 +11,7 @@ import {
     Container
 } from "styled-bootstrap-components";
 import { Button, Error } from "../theme/welcomeStyle";
-import {
-    UploadButtonWrapper,
-    UploadInputField,
-    FadeoutModal
-} from "../theme/appStyle";
-import ProfilePic from "./profilepic";
+import { UploadButtonWrapper, UploadInputField } from "../theme/appStyle";
 import { UserProfilePic } from "../theme/profilepicStyle";
 
 export class Uploader extends React.Component {
@@ -47,7 +42,7 @@ export class Uploader extends React.Component {
     render() {
         return (
             <Container>
-                <FadeoutModal>
+                <Modal>
                     <ModalDialog>
                         <ModalContent>
                             <ModalHeader>
@@ -62,8 +57,7 @@ export class Uploader extends React.Component {
                                 </Button>
                             </ModalHeader>
                             <ModalBody>
-                                <ProfilePic
-                                    compName={UserProfilePic}
+                                <UserProfilePic
                                     avatar={this.props.avatar}
                                     username={this.props.username}
                                 />
@@ -90,7 +84,7 @@ export class Uploader extends React.Component {
                             </ModalFooter>
                         </ModalContent>
                     </ModalDialog>
-                </FadeoutModal>
+                </Modal>
             </Container>
         );
     }

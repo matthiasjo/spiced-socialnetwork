@@ -84,13 +84,28 @@ server.listen(port, () =>
 
 ///////////////////////     SOCKET IO STUFF \\\\\\\\\\\\\\\\\\\\\\\\
 
+const onlineUsers = {};
+async function whoIsOnline(socketid, userid) {
+    if (arguments.length == 2) {
+        onlineUsers[socketid] = userid;
+    } else if (arguments.length == 1) {
+        delete onlineUsers[socketid];
+    }
+    let onlineUsersArr = Object.values(onlineUsers);
+    let distinctUsers = [...new Set(onlineUsersArr)];
+    let onlineUsersInfo = await db.getOnlineUsers(distinctUsers);
+    io.sockets.emit("onlineUsers", onlineUsersInfo.rows);
+}
+
 io.on("connection", socket => {
     console.log(`Socket with id ${socket.id} just connected`);
-    if (!socket.request.session.userId) {
-        socket.on("disconect", function() {
-            console.log(`Socket with id ${socket.id} disconnected`);
-        });
-    }
+    socket.on("disconnect", function() {
+        console.log(`Socket with id ${socket.id} disconnected`);
+        whoIsOnline(socket.id);
+    });
+    socket.on("onlineUsers", async () => {
+        whoIsOnline(socket.id, socket.request.session.userId);
+    });
 
     db.getMostRecentChatMsgs()
         .then(results => {

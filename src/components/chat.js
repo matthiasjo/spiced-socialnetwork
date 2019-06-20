@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { socket } from "./socket";
 import Moment from "react-moment";
 import "moment-timezone";
+import OnlineUsers from "./onlineUsers";
 import { Button } from "../theme/welcomeStyle";
 import { ChatProfilePic } from "../theme/profilepicStyle";
 import {
@@ -12,6 +13,7 @@ import {
     ChatWrapper,
     Messagebox
 } from "../theme/appStyle";
+import { Heading1 } from "../theme/welcomeStyle";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -44,8 +46,9 @@ class Chat extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <OnlineUsers />
+                <Heading1>Chatbox</Heading1>
                 <ChatWrapper>
-                    <div>Chatbox</div>
                     <Chatbox ref={this.elemRef}>
                         {this.props.chatMessages &&
                             this.props.chatMessages.map(chat => (
