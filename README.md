@@ -3,6 +3,8 @@ Spiced Academy: Social Network Project
 
 The goal of this project was to study React, Socket.io and Redux while creating a social network with features like
 friend request, bio editor, picture upload, chat, online users, search etc. 
+This social network has just a learning and demo purpose. I chose the topic of foodsharing randomly as
+as work in progress topic.
 
 ### Install dependencies
 ```
