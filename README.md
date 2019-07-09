@@ -6,6 +6,9 @@ friend request, bio editor, picture upload, chat, online users, search etc.
 This social network has just a learning and demo purpose. I chose the topic of foodsharing randomly as
 as work in progress topic.
 
+technologies/packages used:
+socket.io, redux, styled components, postgres, express, node, aws
+
 ### Install dependencies
 ```
 npm install
