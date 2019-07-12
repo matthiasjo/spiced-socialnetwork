@@ -12,10 +12,10 @@
         "node": "10.15.1"
     },
     "dependencies": {
-        "@babel/cli": "^7.4.3",
-        "@babel/core": "^7.4.3",
+        "@babel/cli": "^7.5.0",
+        "@babel/core": "^7.5.4",
         "@babel/polyfill": "^7.4.3",
-        "@babel/preset-env": "^7.4.3",
+        "@babel/preset-env": "^7.5.4",
         "@babel/preset-react": "^7.0.0",
         "axios": "^0.19.0",
         "babel-loader": "^8.0.5",
@@ -25,10 +25,10 @@
         "cookie-parser": "^1.4.3",
         "cookie-session": "^2.0.0-alpha.2",
         "csurf": "^1.9.0",
-        "enzyme": "^3.8.0",
-        "enzyme-adapter-react-16": "^1.7.1",
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-16": "^1.14.0",
         "eslint": "^4.19.1",
-        "eslint-plugin-react": "^7.12.4",
+        "eslint-plugin-react": "^7.14.2",
         "express": "^4.14.0",
         "express-sanitizer": "^1.0.5",
         "file-loader": "^3.0.1",
@@ -37,7 +37,7 @@
         "jest": "^24.7.1",
         "knox-s3": "^0.9.5",
         "moment": "^2.24.0",
-        "moment-timezone": "^0.5.25",
+        "moment-timezone": "^0.5.26",
         "multer": "^1.3.0",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
@@ -53,8 +53,8 @@
         "socket.io": "^2.2.0",
         "spiced-pg": "^1.0.0",
         "styled-bootstrap-components": "^4.0.0-alpha.0",
-        "styled-components": "^4.2.1",
-        "styled-icons": "^8.0.0",
+        "styled-components": "^4.3.2",
+        "styled-icons": "^8.1.0",
         "styled-normalize": "^8.0.6",
         "uglifyjs-webpack-plugin": "^2.1.2",
         "uid-safe": "^2.1.4",
@@ -72,7 +72,7 @@
         "react-inlinesvg": "^0.8.4",
         "svg-inline-loader": "^0.8.0",
         "url-loader": "^1.1.2",
-        "webpack": "^4.32.2",
-        "webpack-cli": "^3.3.2"
+        "webpack": "^4.35.3",
+        "webpack-cli": "^3.3.5"
     }
 }
