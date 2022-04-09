@@ -36,7 +36,7 @@
         "http-proxy-middleware": "^0.19.1",
         "jest": "^24.7.1",
         "knox-s3": "^0.9.5",
-        "moment": "^2.24.0",
+        "moment": "^2.29.2",
         "moment-timezone": "^0.5.26",
         "multer": "^1.3.0",
         "react": "^16.8.6",
